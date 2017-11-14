@@ -1,7 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 
-jsonfile = open('internal_links.json')
+jsonfile = open('final.json')
 jsonstr = jsonfile.read()
 jsondata = json.loads(jsonstr)
 
@@ -9,6 +9,8 @@ finaltld = {}
 
 def parse(string):
   return string.split("/")[2]
+  #for other understanding of TLD+1, use the below return function
+  #return "".join([str.split("/")[2], "/", str.split("/")[3]])
 
 for i in range(len(jsondata)):
   for j in jsondata[i][1]:
