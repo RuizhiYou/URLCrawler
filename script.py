@@ -2,7 +2,7 @@ import json
 import pickle
 import matplotlib.pyplot as plt
 
-jsonfile = open('final.json')
+jsonfile = open('internal_links.json')
 jsonstr = jsonfile.read()
 jsondata = json.loads(jsonstr)
 
@@ -33,5 +33,3 @@ plt.savefig('plot.png')
 savefile = open("dict.pkl", "wb")
 pickle.dump(finaltld, savefile)
 savefile.close()
-
-
