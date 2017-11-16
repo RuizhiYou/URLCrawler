@@ -1,7 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 
-jsonfile = open('final.json')
+jsonfile = open('internal_links.json')
 jsonstr = jsonfile.read()
 jsondata = json.loads(jsonstr)
 
@@ -26,5 +26,5 @@ xvals = range(len(x))
 plt.figure(figsize=(20,10))
 plt.xticks(xvals, x, rotation="vertical")
 plt.plot(xvals, y)
-#plt.show()
-plt.savefig('plot.png')
+plt.show()
+#plt.savefig('plot.png')

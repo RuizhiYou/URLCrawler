@@ -1,11 +1,11 @@
 from bs4 import BeautifulSoup
 import multiprocessing
-import urlparse
+import urlparse 
 import requests
 import json
 import os
 import time
-import random
+from random import shuffle
 
 # Available: https://github.com/citp/OpenWPM/blob/master/automation/utilities/domain_utils.py  # noqa
 import domain_utils as du
@@ -15,7 +15,6 @@ DEPTH = 1
 DATA_DIR = os.path.expanduser('~/data/')
 ALL_INTERNAL_LINKS = 'internal_links.json'
 USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'  # noqa
-
 
 def get_internal_links_depth(site, depth):
     """Request and parse internal links from `site`"""
@@ -56,8 +55,14 @@ def get_internal_links_depth(site, depth):
             if href is None:
                 continue
             href = urlparse.urljoin(current_url, href)
-            if (not href.startswith('http') or
-                    du.get_ps_plus_1(href) != top_ps1):
+
+            #if (not href.startswith('http') or
+            #        du.get_ps_plus_1(href) != top_ps1):
+            if (not href.startswith('http')):
+                print "top ps1"
+                print top_ps1
+                print du.get_ps_plus_1(href)
+                print href
                 continue
             links.add(urlparse.urldefrag(href)[0])
 
@@ -72,7 +77,6 @@ def get_internal_links_depth(site, depth):
     except Exception as e:
         print("Exception while requesting %s\n%s" % (site, str(e)))
         return (site, list())
-
 
 def get_internal_links(site):
     return get_internal_links_depth(site, depth=DEPTH)
@@ -112,6 +116,6 @@ if __name__ == '__main__':
     start = time.time()
     print start
     sites = sample_top_1m()
-    random.shuffle(sites)
+    shuffle(sites)
     print sites
     collect_homepage_links(sites, nprocesses=30)
