@@ -56,13 +56,9 @@ def get_internal_links_depth(site, depth):
                 continue
             href = urlparse.urljoin(current_url, href)
 
-            #if (not href.startswith('http') or
-            #        du.get_ps_plus_1(href) != top_ps1):
-            if (not href.startswith('http')):
-                print "top ps1"
-                print top_ps1
-                print du.get_ps_plus_1(href)
-                print href
+            if (not href.startswith('http') or
+                    du.get_ps_plus_1(href) == top_ps1):
+            #if (not href.startswith('http')):
                 continue
             links.add(urlparse.urldefrag(href)[0])
 

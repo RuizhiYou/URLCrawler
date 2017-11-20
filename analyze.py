@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import urlparse
 import domain_utils as du
 
-jsonfile = open('internal_links_all_links.json')
+jsonfile = open('thomas_internal_links.json')
 jsonstr = jsonfile.read()
 jsondata = json.loads(jsonstr)
 
@@ -28,9 +28,5 @@ for key in result:
             frequencey_dict[result[key]] += 1
         else:
             frequencey_dict[result[key]] = 1
-f = open("domain_vs_frequence.json","w")
-f.write(json.dumps(result))
-f.close()
-f = open("frequency_vs_appearance.json","w")
-f.write(json.dumps(frequencey_dict, sort_keys=True))
-f.close()
+print (result)
+print len(result)

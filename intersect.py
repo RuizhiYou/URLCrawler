@@ -16,16 +16,19 @@ def parse(string):
   #for other understanding of TLD+1, use the below return function
   #return "".join([str.split("/")[2], "/", str.split("/")[3]])
 
-result = set()
+results = [set() for i in range(3)]
 frequencey_dict = {}
 for k in range(len(jsondata)):
     for i in range(len(jsondata[k])):
         for j in jsondata[k][i][1]:
             if j.startswith("http"):
                 tld = du.get_ps_plus_1(j)
-                result.add(tld)
+                results[k].add(tld)
 
+intersect = (results[0].intersection(results[1])).intersection(results[2])
 f = open('intersect.json', 'w')
-f.write(str(result))
+print len(intersect)
+jsondata = json.dumps(list(intersect))
+json.dump(jsondata, f)
 f.close()
 
