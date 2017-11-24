@@ -1,6 +1,5 @@
 import json
 import matplotlib.pyplot as plt
-import urlparse
 import domain_utils as du
 files = ['calvin_internal_links.json','thomas_internal_links.json','rui_internal_links.json', 'louis_internal_links.json']
 jsondata = []
@@ -25,10 +24,9 @@ for k in range(len(jsondata)):
                 tld = du.get_ps_plus_1(j)
                 results[k].add(tld)
 
-intersect = (results[0].intersection(results[1])).intersection(results[2])
+intersect = (results[0].intersection(results[1])).intersection(results[2]).intersection(results[3])
 f = open('intersect.json', 'w')
-print len(intersect)
-jsondata = json.dumps(list(intersect))
-json.dump(jsondata, f)
+print(len(intersect))
+json.dump(list(intersect), f)
 f.close()
 
